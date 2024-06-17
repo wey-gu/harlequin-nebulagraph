@@ -30,7 +30,7 @@ user = TextOption(
 password = TextOption(
     name="password",
     description=("The password to connect to the NebulaGraph Graphd service."),
-    short_decls=["-P"],
+    short_decls=["-pw"],
     default="nebula",
 )
 
