@@ -1,4 +1,4 @@
-name: Upload Python Packages
+name: CI
 
 on:
   release:
