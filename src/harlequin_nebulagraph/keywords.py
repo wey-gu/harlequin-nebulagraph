@@ -157,6 +157,7 @@ FUNCTIONS = {
     "RIGHT",
     "REPLACE",
     "REVERSE",
+    "SPACES",
     "SPLIT",
     "LPAD",
     "RPAD",
