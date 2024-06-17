@@ -1,20 +1,21 @@
 [tool.poetry]
-name = "harlequin-myadapter"
+name = "harlequin-nebulagraph"
 version = "0.1.0"
-description = "A Harlequin adapter for <my favorite database>."
-authors = ["Ted Conbeer <tconbeer@users.noreply.github.com>"]
-license = "MIT"
+description = "A Harlequin adapter for NebulaGraph."
+authors = ["Wey Gu <weyl.gu@gmail.com>"]
+license = "Apache-2.0"
 readme = "README.md"
 packages = [
-    { include = "harlequin_myadapter", from = "src" },
+    { include = "harlequin_nebulagraph", from = "src" },
 ]
 
 [tool.poetry.plugins."harlequin.adapter"]
-my-adapter = "harlequin_myadapter:MyAdapter"
+nebulagraph = "harlequin_nebulagraph:NebulaGraphAdapter"
 
 [tool.poetry.dependencies]
 python = ">=3.8.1,<4.0"
 harlequin = "^1.7"
+nebula3-python = "^3.8.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.1.6"
