@@ -9,7 +9,7 @@ on:
       - 'poetry.lock'
 
 jobs:
-  test:
+  integration-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -29,7 +29,10 @@ jobs:
         run: |
           cd nebula-docker-compose
           docker compose -f docker-compose-lite.yaml up -d
-      - name: Wait for Nebula to initialize
+      - name: Wait for NebulaGraph to be ready
         run: sleep 20s
+      - name: Load initial data
+        run: |
+          docker run --rm --network host vesoft/nebula-console:nightly -addr 127.0.0.1 -port 9669 -u root -p nebula -e ":play basketballplayer"
       - name: Run tests
         run: pytest
