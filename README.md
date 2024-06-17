@@ -18,7 +18,7 @@ https://github.com/wey-gu/harlequin-nebulagraph/assets/1651790/b27c0ea2-4080-431
 Defaults to `localhost:9669`, `root`, and `password`. You can override these with the following environment variables:
 
 ```bash
-harlequin -a nebulagraph -h 127.0.0.1 -p 9669 -u root -P password
+harlequin -a nebulagraph -h 127.0.0.1 -p 9669 -u root --password password
 ```
 
 ## Documentation
