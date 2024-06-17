@@ -8,6 +8,8 @@
 
 This adapter will use Application Default Credentials to authenticate with NebulaGraph and run queries.
 
+https://github.com/wey-gu/harlequin-nebulagraph/assets/1651790/b27c0ea2-4080-4313-9607-285e477d1898
+
 ## Getting Started
 
 1. Install the adapter: `pip install harlequin-nebulagraph`
