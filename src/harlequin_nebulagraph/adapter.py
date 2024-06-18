@@ -9,8 +9,12 @@ from harlequin import (
 )
 from harlequin.autocomplete.completion import HarlequinCompletion
 from harlequin.catalog import Catalog, CatalogItem
-from harlequin.exception import HarlequinConnectionError, HarlequinQueryError
-from nebula3.Config import Config
+from harlequin.exception import (
+    HarlequinConnectionError,
+    HarlequinQueryError,
+    pretty_print_error,
+)
+from nebula3.Config import Config, SSL_config
 from nebula3.data.ResultSet import ResultSet
 from nebula3.gclient.net import ConnectionPool
 from textual_fastdatatable.backend import AutoBackendType
@@ -122,7 +126,24 @@ class NebulaGraphConnection(HarlequinConnection):
                 options["user"], options["password"]
             )
             self.conn.execute("SHOW SPACES")
-
+        except RuntimeError:
+            ssl_config = SSL_config()
+            pretty_print_error(
+                "Initial Negotiation to NebulaGraph failed, now trying with SSL"
+            )
+            try:
+                connection_pool.init(
+                    [(options["host"], options["port"])], config, ssl_config
+                )
+                self.conn = connection_pool.get_session(
+                    options["user"], options["password"]
+                )
+                self.conn.execute("SHOW SPACES")
+            except Exception as e:
+                pretty_print_error("Connection Init to NebulaGraph failed.")
+                raise HarlequinConnectionError(
+                    msg=str(e), title="Harlequin could not connect to NebulaGraph"
+                ) from e
         except Exception as e:
             raise HarlequinConnectionError(
                 msg=str(e), title="Harlequin could not connect to NebulaGraph."
