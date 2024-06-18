@@ -1,5 +1,8 @@
 ![Harlequin NebulaGraph Adapter](https://raw.githubusercontent.com/wey-gu/harlequin-nebulagraph/main/assets/harlequin-nebulagraph-banner.png)
 
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/harlequin)
+![Runs on Linux | MacOS | Windows](https://img.shields.io/badge/runs%20on-Linux%20%7C%20MacOS%20%7C%20Windows-blue)
+
 [![CI](https://github.com/wey-gu/harlequin-nebulagraph/actions/workflows/pypi.yaml/badge.svg)](https://github.com/wey-gu/harlequin-nebulagraph/actions/workflows/pypi.yaml)
 [![for NebulaGraph](https://img.shields.io/badge/Toolchain-NebulaGraph-blue)](https://github.com/vesoft-inc/nebula) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/wey-gu/harlequin-nebulagraph?label=Version)](https://github.com/wey-gu/harlequin-nebulagraph/releases)
 [![pypi-version](https://img.shields.io/pypi/v/harlequin-nebulagraph)](https://pypi.org/project/harlequin-nebulagraph/)
