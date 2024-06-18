@@ -257,7 +257,7 @@ class NebulaGraphConnection(HarlequinConnection):
                 label=function,
                 type_label="fn",
                 value=function,
-                priority=100,
+                priority=1000,
                 context=None,
             )
             for function in FUNCTIONS
