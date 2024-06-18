@@ -218,7 +218,7 @@ class NebulaGraphConnection(HarlequinConnection):
                     qualified_identifier=f"`{db_name}`",
                     query_name=f"`{db_name}`",
                     label=db_name,
-                    type_label="db",
+                    type_label="space",
                     children=children,
                 )
             )
