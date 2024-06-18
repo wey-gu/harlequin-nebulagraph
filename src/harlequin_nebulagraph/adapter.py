@@ -9,8 +9,11 @@ from harlequin import (
 )
 from harlequin.autocomplete.completion import HarlequinCompletion
 from harlequin.catalog import Catalog, CatalogItem
-from harlequin.exception import HarlequinConnectionError, HarlequinQueryError
-from nebula3.Config import Config
+from harlequin.exception import (
+    HarlequinConnectionError,
+    HarlequinQueryError,
+)
+from nebula3.Config import Config, SSL_config
 from nebula3.data.ResultSet import ResultSet
 from nebula3.gclient.net import ConnectionPool
 from textual_fastdatatable.backend import AutoBackendType
@@ -122,7 +125,20 @@ class NebulaGraphConnection(HarlequinConnection):
                 options["user"], options["password"]
             )
             self.conn.execute("SHOW SPACES")
-
+        except RuntimeError:
+            ssl_config = SSL_config()
+            try:
+                connection_pool.init(
+                    [(options["host"], options["port"])], config, ssl_config
+                )
+                self.conn = connection_pool.get_session(
+                    options["user"], options["password"]
+                )
+                self.conn.execute("SHOW SPACES")
+            except Exception as e:
+                raise HarlequinConnectionError(
+                    msg=str(e), title="Harlequin could not connect to NebulaGraph"
+                ) from e
         except Exception as e:
             raise HarlequinConnectionError(
                 msg=str(e), title="Harlequin could not connect to NebulaGraph."
@@ -218,7 +234,7 @@ class NebulaGraphConnection(HarlequinConnection):
                     qualified_identifier=f"`{db_name}`",
                     query_name=f"`{db_name}`",
                     label=db_name,
-                    type_label="db",
+                    type_label="space",
                     children=children,
                 )
             )
