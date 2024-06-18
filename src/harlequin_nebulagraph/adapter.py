@@ -12,7 +12,6 @@ from harlequin.catalog import Catalog, CatalogItem
 from harlequin.exception import (
     HarlequinConnectionError,
     HarlequinQueryError,
-    pretty_print_error,
 )
 from nebula3.Config import Config, SSL_config
 from nebula3.data.ResultSet import ResultSet
@@ -128,9 +127,6 @@ class NebulaGraphConnection(HarlequinConnection):
             self.conn.execute("SHOW SPACES")
         except RuntimeError:
             ssl_config = SSL_config()
-            pretty_print_error(
-                "Initial Negotiation to NebulaGraph failed, now trying with SSL"
-            )
             try:
                 connection_pool.init(
                     [(options["host"], options["port"])], config, ssl_config
@@ -140,7 +136,6 @@ class NebulaGraphConnection(HarlequinConnection):
                 )
                 self.conn.execute("SHOW SPACES")
             except Exception as e:
-                pretty_print_error("Connection Init to NebulaGraph failed.")
                 raise HarlequinConnectionError(
                     msg=str(e), title="Harlequin could not connect to NebulaGraph"
                 ) from e
