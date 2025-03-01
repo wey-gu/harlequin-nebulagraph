@@ -14,7 +14,7 @@ nebulagraph = "harlequin_nebulagraph:NebulaGraphAdapter"
 
 [tool.poetry.dependencies]
 python = ">=3.8.1,<4.0"
-harlequin = "^1.7"
+harlequin = ">=1.7,<3"
 nebula3-python = "^3.8.0"
 
 [tool.poetry.group.dev.dependencies]
